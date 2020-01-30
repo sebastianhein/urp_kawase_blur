@@ -13,3 +13,5 @@ Features:
 
 This is how it looks.
 ![This is how it looks if the image appears.](blur.png)
+
+Developed with Unity 2019.3
