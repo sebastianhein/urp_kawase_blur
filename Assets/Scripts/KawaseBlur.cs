@@ -1,4 +1,3 @@
-﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -102,6 +101,12 @@ public class KawaseBlur : ScriptableRendererFeature
             CommandBufferPool.Release(cmd);
         }
 
+        public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
+        {
+            var src = renderingData.cameraData.renderer.cameraColorTarget;
+            Setup(src);
+        }
+
         public override void FrameCleanup(CommandBuffer cmd)
         {
         }
@@ -123,10 +128,6 @@ public class KawaseBlur : ScriptableRendererFeature
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        var src = renderer.cameraColorTarget;
-        scriptablePass.Setup(src);
         renderer.EnqueuePass(scriptablePass);
     }
 }
-
-
